@@ -1,0 +1,503 @@
+{
+	"info": {
+		"_postman_id": "841f9f12-2a4f-49fe-a3f2-07896058b23b",
+		"name": "Contact List",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Basic EndPoint Test",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2ba9795a-612f-46a4-951c-77a64a99c5ec",
+								"exec": [
+									"var jsonData= pm.response.json();\r",
+									"pm.environment.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "2cae9a51-6a56-45f4-b167-52854d94de75",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://thinking-tester-contact-list.herokuapp.com/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Contact List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5a1ab48b-1d09-4833-b436-5378f6961083",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\",  \"application/json; charset=utf-8\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "08a634be-5bb8-493f-912c-f472cc392fb2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact",
+					"id": "c064ec96-f0dc-4c5a-a66b-1e03a13c9d4c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Sachin\",\r\n    \"lastName\": \"Tendulkar\",\r\n    \"birthdate\": \"1970-01-01\",\r\n    \"email\": \"pprunewhip@fake.com\",\r\n    \"phone\": \"8005551000\",\r\n    \"street1\": \"123 Main St.\",\r\n    \"street2\": \"Apartment Q\",\r\n    \"city\": \"New York\",\r\n    \"stateProvince\": \"NY\",\r\n    \"postalCode\": \"12345\",\r\n    \"country\": \"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts/{{contactId}}"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Contact",
+					"id": "c91fab63-513e-4046-8bbe-3cd92d603259",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Prunella\",\r\n    \"lastName\": \"Prunewhip\",\r\n    \"birthdate\": \"1977-07-07\",\r\n    \"email\": \"pprunewhip@fake.com\",\r\n    \"phone\": \"8005551000\",\r\n    \"street1\": \"123 Main St.\",\r\n    \"street2\": \"Apartment Q\",\r\n    \"city\": \"New York\",\r\n    \"stateProvince\": \"NY\",\r\n    \"postalCode\": \"12345\",\r\n    \"country\": \"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts/66a8efb5ad742d0013809aa9"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Contact",
+					"id": "38118bba-12bc-47bf-ad9a-c2ccc003ab20",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Prunella\",\r\n    \"lastName\": \"Prunewhip\",\r\n    \"birthdate\": \"1977-07-07\",\r\n    \"email\": \"pprunewhip@fake.com\",\r\n    \"phone\": \"8005551000\",\r\n    \"street1\": \"123 Main St.\",\r\n    \"street2\": \"Apartment Q\",\r\n    \"city\": \"New York\",\r\n    \"stateProvince\": \"NY\",\r\n    \"postalCode\": \"12345\",\r\n    \"country\": \"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts/{{contactId}}"
+					},
+					"response": []
+				}
+			],
+			"id": "f75ada9c-be41-48f6-a266-6bda3bece3cf"
+		},
+		{
+			"name": "Negative Tests",
+			"item": [
+				{
+					"name": "SetUp - Add Contact",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8428ad39-3b0a-4f63-8f84-864476d0feec",
+								"exec": [
+									"var jsonData = pm.response.json()\r",
+									"pm.environment.set(\"contactId\", jsonData._id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ebead270-cdc1-4bed-85f3-b995bbc02acd",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "6a53933e-b1a0-434e-9943-ee4df1d9c308",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"{{firstName}}\",\r\n    \"lastName\": \"{{lastName}}\",\r\n    \"birthdate\": \"{{birthdate}}\",\r\n    \"email\": \"{{emailid}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"street1\": \"{{street1}}\",\r\n    \"street2\": \"{{street1}}\",\r\n    \"city\": \"{{city}}\",\r\n    \"stateProvince\": \"{{stateProvince}}\",\r\n    \"postalCode\": \"{{postalCode}}\",\r\n    \"country\": \"{{country}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Contact List unauthorized",
+					"id": "30cf1b53-f341-4935-ab26-973412d03705",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": ""
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Contact -Not found",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ed442995-13b4-4292-a44e-645ba9342712",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "6a762fd3-748d-43a0-b116-6b0884e3925a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Prunella\",\r\n    \"lastName\": \"Prunewhip\",\r\n    \"birthdate\": \"1977-07-07\",\r\n    \"email\": \"pprunewhip@fake.com\",\r\n    \"phone\": \"8005551000\",\r\n    \"street1\": \"123 Main St.\",\r\n    \"street2\": \"Apartment Q\",\r\n    \"city\": \"New York\",\r\n    \"stateProvince\": \"NY\",\r\n    \"postalCode\": \"12345\",\r\n    \"country\": \"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts/66a8efb5ad742d0013898476"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact missing required field",
+					"id": "0b214407-e433-4a4f-8f7b-e17f479275b9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact last name too long",
+					"id": "d3f478d6-8d47-459d-a25a-2f7eb9e44a61",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contact Copy",
+					"id": "24a63f94-fc7b-498e-95fc-bcc4cf387c3a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Sachin\",\r\n    \"lastName\": \"Tendulkar\",\r\n    \"birthdate\": \"1970-01-01\",\r\n    \"email\": \"pprunewhip@fake.com\",\r\n    \"phone\": \"8005551000\",\r\n    \"street1\": \"123 Main St.\",\r\n    \"street2\": \"Apartment Q\",\r\n    \"city\": \"New York\",\r\n    \"stateProvince\": \"NY\",\r\n    \"postalCode\": \"12345\",\r\n    \"country\": \"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts/66a8efb5ad742d0013809aa9"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact Invalid Date of Birth",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8428ad39-3b0a-4f63-8f84-864476d0feec",
+								"exec": [
+									"\r",
+									"pm.test(\"Invalid birthdate error message is returned \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Birthdate is invalid\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ebead270-cdc1-4bed-85f3-b995bbc02acd",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "6b888580-fcfd-4dd7-b8cb-2a02aedff928",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"{{firstName}}\",\r\n    \"lastName\": \"{{lastName}}\",\r\n    \"birthdate\": \"2030-14-14\",\r\n    \"email\": \"{{emailid}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"street1\": \"{{street1}}\",\r\n    \"street2\": \"{{street1}}\",\r\n    \"city\": \"{{city}}\",\r\n    \"stateProvince\": \"{{stateProvince}}\",\r\n    \"postalCode\": \"{{postalCode}}\",\r\n    \"country\": \"{{country}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts"
+					},
+					"response": []
+				},
+				{
+					"name": "Add Contact Invalid Email Address",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8428ad39-3b0a-4f63-8f84-864476d0feec",
+								"exec": [
+									"\r",
+									"pm.test(\"Invalid birthdate error message is returned \", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Birthdate is invalid\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ebead270-cdc1-4bed-85f3-b995bbc02acd",
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "16adae3b-a874-4977-a110-a9c9bfb82def",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmE4ZTk2YmFkNzQyZDAwMTM4MDlhNmEiLCJpYXQiOjE3MjIzNDYxOTR9.XjLuc3gNaFTYOBYCWhJAnlFbVsM1ZYc3hqZRtvl3Frg"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"{{firstName}}\",\r\n    \"lastName\": \"{{lastName}}\",\r\n    \"birthdate\": \"{{birthdate}}\",\r\n    \"email\": \"ravi@fake\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"street1\": \"{{street1}}\",\r\n    \"street2\": \"{{street1}}\",\r\n    \"city\": \"{{city}}\",\r\n    \"stateProvince\": \"{{stateProvince}}\",\r\n    \"postalCode\": \"{{postalCode}}\",\r\n    \"country\": \"{{country}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://thinking-tester-contact-list.herokuapp.com/contacts/{{contactId}}"
+					},
+					"response": []
+				}
+			],
+			"id": "03ac10f5-ab21-4c43-bfc1-2580a11a1d85"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "77540e38-3cce-414f-968f-66de24d2b115",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "aa48e94e-db85-45f3-a989-c59f9d312680",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.test(\"Response time is less than 3000ms\", function () {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+					"});"
+				]
+			}
+		}
+	]
+}
